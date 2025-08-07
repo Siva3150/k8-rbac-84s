@@ -18,25 +18,45 @@
 #   namespace: kube-system
 #   uid: 7c47ebd8-d158-4e4e-b0e3-dce2584f27a6
 
----
+# ---
+
+# apiVersion: v1
+# data:
+#   mapRoles: |
+#     - rolearn:arn:aws:iam::445567085619:role/eksctl-roboshop-nodegroup-roboshop-NodeInstanceRole-RQaOuadkHbVW
+#     groups:
+#       - system:bootstrappers
+#       - system:nodes
+#       username: system:node:{{EC2PrivateDNSName}}
+#   mapUsers: |
+#     - groups:
+#       - roboshop-trainee
+#       userarn: arn:aws:iam::445567085619:user/suresh
+#       username: suresh
+# kind: ConfigMap
+# metadata:
+#   creationTimestamp: "2025-08-06T16:29:10Z"
+#   name: aws-auth
+#   namespace: kube-system
+#   resourceVersion: "1433"
+#   uid: 0ea0a138-e470-48ac-9f4c-a53ccca346bd
 
 apiVersion: v1
-data:
-  mapRoles: |
-    - rolearn:arn:aws:iam::445567085619:role/eksctl-roboshop-nodegroup-roboshop-NodeInstanceRole-RQaOuadkHbVW
-    groups:
-      - system:bootstrappers
-      - system:nodes
-      username: system:node:{{EC2PrivateDNSName}}
-  mapUsers: |
-    - groups:
-      - roboshop-trainee
-      userarn: arn:aws:iam::445567085619:user/suresh
-      username: suresh
 kind: ConfigMap
 metadata:
-  creationTimestamp: "2025-08-06T16:29:10Z"
   name: aws-auth
   namespace: kube-system
-  resourceVersion: "1433"
-  uid: 0ea0a138-e470-48ac-9f4c-a53ccca346bd
+data:
+  mapRoles: |
+    - rolearn: arn:aws:iam::445567085619:role/eksctl-roboshop-nodegroup-roboshop-NodeInstanceRole-RQaOuadkHbVW
+      username: system:node:{{EC2PrivateDNSName}}
+      groups:
+        - system:bootstrappers
+        - system:nodes
+
+  mapUsers: |
+    - userarn: arn:aws:iam::445567085619:user/suresh
+      username: suresh
+      groups:
+        - roboshop-trainee
+
